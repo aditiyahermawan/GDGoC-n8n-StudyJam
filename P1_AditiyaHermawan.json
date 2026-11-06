@@ -1,0 +1,99 @@
+{
+  "name": "My workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "P1-test",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.2,
+      "position": [
+        0,
+        0
+      ],
+      "id": "7ae209d7-9a3a-429a-969b-860367b57daf",
+      "name": "Webhook",
+      "webhookId": "7b72fdd8-8b0c-42d9-8eee-232bcd48f7d8"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "4c70b8c8-558b-4ec6-b1a6-dcd490ec222d",
+              "name": "status",
+              "value": "success",
+              "type": "string"
+            },
+            {
+              "id": "46be2e92-29eb-43c3-bfb7-dcf14c4b17f8",
+              "name": "mesaage",
+              "value": "=Terima kasih {{ $json.body.Nama }} Pesan Kamu {{  $json.body.Pesan }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        224,
+        0
+      ],
+      "id": "a5ab7c22-e528-4240-a235-2d8cb5fde4a8",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        448,
+        0
+      ],
+      "id": "8c472dfd-1035-46c4-bee0-a42643d50e0c",
+      "name": "Respond to Webhook"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "",
+  "meta": {},
+  "nodeGroups": [],
+  "id": "",
+  "tags": []
+}
